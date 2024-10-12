@@ -140,3 +140,11 @@ def confirm_buttons():
     kb.add(yes, no)
 
     return kb
+
+def lang_buttons():
+    kb = types.ReplyKeyboardMarkup(resize_keyboard=True)
+    rus = types.KeyboardButton(text='Русский')
+    eng = types.KeyboardButton(text='English')
+    kb.add(rus, eng)
+
+    return kb

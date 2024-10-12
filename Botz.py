@@ -2,7 +2,7 @@
 import telebot
 import database as db
 import buttons as bt
-
+from buttons import lang_buttons
 
 # Создаем объект бота
 bot = telebot.TeleBot('7838544838:AAG3Sd4H8_XNguLIAagqFrbkOCZfCvzdOOA')
@@ -12,9 +12,12 @@ admin_id = 89567588
 admins = {}
 users = {}
 
-
 # Обработка команды /start
 @bot.message_handler(commands=['start'])
+def leng(message):
+    user_id = message.from_user.id
+    bot.send_message(user_id,"Выберите язык",reply_markup=bt.lang_buttons())
+    bot.register_next_step_handler(message, start)
 def start(message):
     user_id = message.from_user.id
     products = db.get_pr_buttons()
@@ -300,4 +303,4 @@ def confirm_change_attr(message, attr, new_value):
         bot.register_next_step_handler(message, admin_choice)
 
 
-bot.polling()
+bot.polling(non_stop=True)
